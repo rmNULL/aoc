@@ -1,0 +1,15 @@
+#lang racket
+
+(define input
+  (call-with-input-file "easy.txt" port->lines))
+
+(define asteroids
+  (append-map
+   (λ (str y)
+     (for/list ([c str]
+                [x (string-length str)]
+                #:when (eq? c #\#))
+     (cons y x)))
+   input
+   (range (length input))))
+
